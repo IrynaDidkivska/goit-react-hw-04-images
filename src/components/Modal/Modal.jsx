@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Overlay, StyledModal } from './Modal.styled';
 import PropTypes from 'prop-types';
 
 export const Modal = ({ onClose, isOpen, children }) => {
-  const onEscapeClick = event => {
-    if (event.code === 'Escape') {
-      onClose();
-    }
-  };
+  const onEscapeClick = useCallback(
+    event => {
+      if (event.code === 'Escape') {
+        onClose();
+      }
+    },
+    [onClose]
+  );
 
   const onBackDropClick = event => {
     if (event.target === event.currentTarget) {
