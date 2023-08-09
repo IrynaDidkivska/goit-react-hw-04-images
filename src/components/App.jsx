@@ -49,7 +49,7 @@ export const App = () => {
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false });
     }
-  }, [query, page, per_page, state.query, state.page]);
+  }, [query, page, per_page, state.query, state.page, state.images.length]);
 
   useEffect(() => {
     if (query !== initialState.query || page !== initialState.page) {
