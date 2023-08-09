@@ -31,10 +31,6 @@ export const App = () => {
         per_page,
       });
 
-      if (query === state.query && page === state.page && totalHits) {
-        toast.success(`Hooray! We found ${totalHits} images.`);
-      }
-
       if (!totalHits) {
         toast.error(
           'Sorry, there are no images matching your search query. Please try again.'
@@ -47,7 +43,7 @@ export const App = () => {
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false });
     }
-  }, [query, page, per_page, state.query, state.page]);
+  }, [query, page, per_page]);
 
   useEffect(() => {
     if (query !== initialState.query || page !== initialState.page) {
@@ -63,6 +59,9 @@ export const App = () => {
 
   const handleLoadMoreBtn = () => {
     dispatch({ type: 'LOAD_MORE', payload: page + 1 });
+    toast.success(
+      `Hooray! We found ${totalHits - state.images.length} images.`
+    );
   };
 
   const handleClickImage = largeImageURL => {
