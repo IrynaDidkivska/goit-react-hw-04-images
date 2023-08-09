@@ -31,12 +31,14 @@ export const App = () => {
         per_page,
       });
 
-      if (query === state.query && page === state.page) {
-        toast.success(`Hooray! We found ${totalHits} images.`);
+      if (query === state.query && page === state.page && totalHits) {
+        toast.success(
+          `Hooray! We found ${totalHits - state.images.length} images.`
+        );
       }
 
       if (!totalHits) {
-        toast.warn(
+        toast.error(
           'Sorry, there are no images matching your search query. Please try again.'
         );
       }

@@ -14,7 +14,7 @@ export const reducer = (state, action) => {
     case 'UPDATE_IMAGES':
       return {
         ...state,
-        images: action.payload.hits,
+        images: [...state.images, ...action.payload.hits],
         totalHits: action.payload.totalHits,
       };
     case 'SET_LOADING':
