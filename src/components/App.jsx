@@ -32,9 +32,7 @@ export const App = () => {
       });
 
       if (query === state.query && page === state.page && totalHits) {
-        toast.success(
-          `Hooray! We found ${totalHits - state.images.length} images.`
-        );
+        toast.success(`Hooray! We found ${totalHits} images.`);
       }
 
       if (!totalHits) {
