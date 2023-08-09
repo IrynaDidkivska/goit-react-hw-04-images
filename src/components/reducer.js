@@ -33,7 +33,6 @@ export const reducer = (state, action) => {
       return {
         ...state,
         page: action.payload,
-        totalHits: action.payload.totalHits,
       };
     case 'CLICK_IMG':
       return { ...state, largeImageURL: action.payload, isOpen: true };

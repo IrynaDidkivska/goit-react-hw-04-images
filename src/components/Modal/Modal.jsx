@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import { Overlay, StyledModal } from './Modal.styled';
 import PropTypes from 'prop-types';
 
-export const Modal = ({ onClose, isOpen, children }) => {
+export const Modal = ({ onClose, children }) => {
   const onEscapeClick = useCallback(
     event => {
       if (event.code === 'Escape') {
@@ -19,27 +19,19 @@ export const Modal = ({ onClose, isOpen, children }) => {
   };
 
   useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('keydown', onEscapeClick);
-    } else {
-      document.removeEventListener('keydown', onEscapeClick);
-    }
-
+    document.addEventListener('keydown', onEscapeClick);
     return () => {
       document.removeEventListener('keydown', onEscapeClick);
     };
-  }, [isOpen, onEscapeClick]);
+  }, [onEscapeClick]);
 
   return (
-    isOpen && (
-      <Overlay onClick={onBackDropClick}>
-        <StyledModal>{children}</StyledModal>
-      </Overlay>
-    )
+    <Overlay onClick={onBackDropClick}>
+      <StyledModal>{children}</StyledModal>
+    </Overlay>
   );
 };
 Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
 };
